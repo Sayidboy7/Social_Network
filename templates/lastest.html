@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Lastest Posts
+{% endblock %}
+
+{% block content %}
+	<h1 align="center"><b><i>NetWork</i></b></h1>
+
+	<nav class="navbar-tags">
+		<ul>
+			<a href="/"><li>Home</li></a>
+			<a href="/lastest"><li class="active">Lastest Posts</li></a>
+			{% if 'user_id' in request.session %}
+			<a href="{% url 'readed_posts' %}"><li>Readed Posts</li></a>
+			{% endif %}
+
+		</ul>
+	</nav>
+
+	
+	<div class="weather">
+		<h4>{{ weather }}</h4>
+	</div>
+
+	<div class="post-list">
+	{% for post in posts %}
+		<a href="{% url 'post_detail' slug=post.slug %}">
+			<div class="post-item">
+				<h3>{{ post.title }}</h3>
+				<img src="{{ post.image.url }}">
+				<p>{{ post.content|slice:':100'}}</p>
+
+				<i>{{ post.updated_time }}</i>				
+			</div>
+		</a>
+	{% endfor %}
+	</div>
+
+{% endblock %}

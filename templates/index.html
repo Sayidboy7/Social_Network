@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Home | Let's Dive In
+{% endblock %}
+
+{% block content %}
+	<h1 align="center" class="main-logo">Welcome to <b><i>NetWork</i></b></h1>
+	<h1 align="center" class="extra-logo">Net<i>Work</i></h1>
+
+	<nav class="navbar-tags">
+		<ul>
+			<a><li class="active">Home</li></a>
+			<a href="/lastest/"><li>Lastest Posts</li></a>
+			{% if 'user_id' in request.session %}
+			<a href="{% url 'readed_posts' %}"><li>Readed Posts</li></a>
+			{% endif %}
+		</ul>
+	</nav>
+	{% if 'username' in request.session %}
+		<a href="{% url 'post' %}"><button class="post-btn">Post +</button></a>
+	{% endif %}
+
+	<div class="weather">
+		<h4>{{ request.session.weather }}</h4>
+	</div>
+
+	
+
+	<div class="post-list">
+	{% for post in posts %}
+		<a href="{% url 'post_detail' slug=post.slug %}">
+			<div class="post-item">
+				<h3>{{ post.title }}</h3>
+				<img src="{{ post.image.url }}">
+				<p>{{ post.content|slice:':100'}}</p>
+
+				<i>{{ post.updated_time }}</i>				
+			</div>
+		</a>
+	{% endfor %}
+	</div>
+
+{% endblock %}

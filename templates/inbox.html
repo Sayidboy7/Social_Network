@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+    <link rel="stylesheet" href="style.css">
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#eceff1;
+        }
+    
+        .chat-container{
+            display:flex;
+            height:100vh;
+        }
+    
+        /* Sidebar */
+    
+        .sidebar{
+            width:360px;
+            background:white;
+            border-right:1px solid #ddd;
+            display:flex;
+            flex-direction:column;
+        }
+    
+        .sidebar-header{
+            padding:20px;
+            border-bottom:1px solid #ddd;
+        }
+    
+        .search-box{
+            padding:15px;
+        }
+    
+        .search-box input{
+            width:100%;
+            padding:12px;
+            border:none;
+            background:#f1f1f1;
+            border-radius:8px;
+            outline:none;
+        }
+    
+        .chat-list{
+            overflow-y:auto;
+            flex:1;
+        }
+    
+        .chat-item{
+            display:flex;
+            align-items:center;
+            padding:15px;
+            cursor:pointer;
+            transition:.3s;
+        }
+    
+        .chat-item:hover{
+            background:#f4f4f4;
+        }
+    
+        .chat-item.active{
+            background:#e3f2fd;
+        }
+    
+        .chat-item img{
+            width:55px;
+            height:55px;
+            border-radius:50%;
+            object-fit:cover;
+        }
+    
+        .chat-info{
+            margin-left:15px;
+            width:100%;
+        }
+    
+        .top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+    
+        .top span{
+            color:#888;
+            font-size:12px;
+        }
+    
+        .chat-info h4{
+            font-size:17px;
+        }
+    
+        .chat-info p{
+            color:#777;
+            font-size:14px;
+            margin-top:4px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+    
+        /* Chat */
+    
+        .chat-window{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            background:#f7f7f7;
+        }
+    
+        .chat-header{
+            background:white;
+            border-bottom:1px solid #ddd;
+            padding:15px 20px;
+            display:flex;
+            align-items:center;
+        }
+    
+        .chat-header img{
+            width:50px;
+            height:50px;
+            border-radius:50%;
+            margin-right:15px;
+        }
+    
+        .chat-header small{
+            color:green;
+        }
+    
+        /* Messages */
+    
+        .messages{
+            flex:1;
+            overflow-y:auto;
+            padding:20px;
+            display:flex;
+            flex-direction:column;
+        }
+    
+        .message{
+            max-width:60%;
+            padding:12px 18px;
+            margin-bottom:15px;
+            border-radius:20px;
+            word-wrap:break-word;
+        }
+    
+        .received{
+            background:white;
+            align-self:flex-start;
+            border-bottom-left-radius:5px;
+        }
+    
+        .sent{
+            background:#0084ff;
+            color:white;
+            align-self:flex-end;
+            border-bottom-right-radius:5px;
+        }
+    
+        /* Input */
+    
+        .message-input{
+            display:flex;
+            padding:15px;
+            background:white;
+            border-top:1px solid #ddd;
+        }
+    
+        .message-input input{
+            flex:1;
+            padding:12px;
+            border:1px solid #ddd;
+            border-radius:30px;
+            outline:none;
+        }
+    
+        .message-input button{
+            margin-left:10px;
+            padding:12px 25px;
+            border:none;
+            background:#0084ff;
+            color:white;
+            border-radius:30px;
+            cursor:pointer;
+        }
+    
+        .message-input button:hover{
+            background:#006fd6;
+        }
+    
+        /* Responsive */
+    
+        @media(max-width:768px){
+    
+            .sidebar{
+                width:100%;
+            }
+    
+            .chat-window{
+                display:none;
+            }
+    
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>Messages</h2>
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <div class="chat-list">
+
+            <div class="chat-item active">
+                <img src="https://i.pravatar.cc/50?img=1">
+                <div class="chat-info">
+                    <div class="top">
+                        <h4>John Smith</h4>
+                        <span>10:32</span>
+                    </div>
+                    <p>Hello! How are you?</p>
+                </div>
+            </div>
+
+            <div class="chat-item">
+                <img src="https://i.pravatar.cc/50?img=2">
+                <div class="chat-info">
+                    <div class="top">
+                        <h4>Emma</h4>
+                        <span>Yesterday</span>
+                    </div>
+                    <p>See you tomorrow 😊</p>
+                </div>
+            </div>
+
+            <div class="chat-item">
+                <img src="https://i.pravatar.cc/50?img=3">
+                <div class="chat-info">
+                    <div class="top">
+                        <h4>Michael</h4>
+                        <span>Mon</span>
+                    </div>
+                    <p>Thanks!</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Right Side -->
+    <div class="chat-window">
+
+        <div class="chat-header">
+            <img src="https://i.pravatar.cc/50?img=1">
+            <div>
+                <h3>John Smith</h3>
+                <small>Online</small>
+            </div>
+        </div>
+
+        <div class="messages">
+
+            <div class="message received">
+                Hello 👋
+            </div>
+
+            <div class="message sent">
+                Hi! How are you?
+            </div>
+
+            <div class="message received">
+                I'm fine. What about you?
+            </div>
+
+            <div class="message sent">
+                Doing great!
+            </div>
+
+        </div>
+
+        <div class="message-input">
+            <input type="text" placeholder="Type a message...">
+            <button>Send</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

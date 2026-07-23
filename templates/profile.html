@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <div class="profile-top">
+            {% if user.photo %}
+            <img src="{{ user.photo.url }}" alt="profile">
+            {% endif %}
+
+            <div class="profile-info">
+                <h2>{{ user.username }}</h2>
+
+                <p class="email">{{ user.email }}</p>
+                {% if user.username == request.session.username %}
+                <a href="{% url 'inbox' %}" class="btn">Inbox</a>
+                {% endif %}
+                <p class="bio">
+                    Django developer | Gamer | Learning DRF and frontend.
+                </p>
+                {% if not current_user.username == user.username %}
+                <div class="profile-buttons">
+                    {% if user.username in subscribed %}
+                        <a class="btn-off" href="{% url 'unsubscribe' ch_name=user.username %}">Followed</a>
+                    {% else %}
+                        <a class="btn" href="{% url 'subscribe' ch_name=user.username %}">Follow</a>
+                    {% endif %}
+                    {% if request.session.user_id %}
+                    <a class="message-btn" href="{% url 'start_chat' user_id=user.id %}">Message</a>
+                    {% else %}
+                    <a class="message-btn" href="/auth/login/">Message</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+        {% if request.session.username == user.username %}
+        <div class="sidebar">
+            <h3>Subscribed</h3>
+            <ul>
+                {% if subscribed %}
+                    {% for ch in subscribed %}
+                        <a href="{% url 'profile' username=ch %}"><li><i class="white-man">👤</i> <span>{{ ch }}</span></li></a>
+                    
+                    {% endfor %}
+                {% else %}
+                    <p>No channels</p>
+                {% endif %}
+
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="profile-stats">
+
+            <div class="stat-box">
+                <h3>{{ user.posts.count }}</h3>
+                <span>Posts</span>
+            </div>
+
+            <div class="stat-box">
+                <h3>{{ total_likes }}</h3>
+                <span>Total Likes</span>
+            </div>
+
+            <div class="stat-box">
+                <h3>{{ total_views }}</h3>
+                <span>Total Views</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="profile-posts">
+
+        <h2>User Posts</h2>
+
+        <div class="post-grid">
+
+            {% for post in user.posts.all %}
+
+            <div class="post-card">
+
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+
+                <div class="post-content">
+
+                    <h3>{{ post.title }}</h3>
+
+                    <p>
+                        {{ post.content|truncatewords:15 }}
+                    </p>
+
+                    <a href="{% url 'post_detail' slug=post.slug %}">
+                        Read More
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

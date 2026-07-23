@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Register | Page
+{% endblock %}
+
+
+{% block content %}
+	<h1 align="center">Register</h1>
+
+	<form action="{% url 'register' %}" method="POST">
+		{% csrf_token %}
+		<label>Firstname</label>
+		<input type="text" name="firstname" placeholder="Firstname. . .">
+
+		<label>Lastname</label>
+		<input type="text" name="lastname" placeholder="Lastname. . .">
+
+		<label>Email</label>
+		<input type="emial" name="email" placeholder="Email. . .">
+
+		<label>Choose Username</label>
+		<input type="text" name="username" placeholder="Username . . .">
+
+		<label>Password</label>
+		<input type="password" name="password1" placeholder="password">
+
+		<label>Password Confirm</label>
+		<input type="password" name="password2" placeholder="Confirm your password">
+
+		<button class="btn">Register</button>
+	</form>
+
+{% endblock %}

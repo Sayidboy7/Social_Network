@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chatting</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h1 align=""><a href="/">Net<i>Work</i></a></h1>
+
+    <h1 align="center">{{ other_user }}</h1>
+
+    <div id="messages">
+        {% for message in messages %}
+        <div class="message">
+
+            {% if message.sender.username == request.session.username %}
+            <div class="my-message">
+                <p>
+                    {{ message.body }}
+                </p>
+
+                <small>
+                    {{ message.created_at|date:"H:i" }}
+                </small>
+            </div>
+            {% else %}
+                <div class="other-message">
+                    <p>
+                        {{ message.body }}
+                    </p>
+
+                    <small>
+                        {{ message.created_at|date:"H:i" }}
+                    </small>
+                </div>
+            {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+
+
+		<div class="chat-input"> 
+            <input type="text" id="message-input"  >
+
+            <button id="send-btn">
+                Send
+            </button>      
+        </div>
+
+<script>
+	const conversationId = "{{ conversation.id }}";
+    const CURRENT_USER = "{{ request.session.username }}";
+    const messages = document.getElementById("messages");
+
+
+    const socket = new WebSocket(
+        "ws://" +
+        window.location.host +
+        "/ws/chat/" +
+        conversationId +
+        "/"
+    );
+
+    socket.onmessage = function(e) {
+
+        const data = JSON.parse(e.data);
+
+        const className =
+            data.sender === CURRENT_USER
+                ? "my-message"
+                : "other-message";
+
+        messages.insertAdjacentHTML(
+            "beforeend",
+            `
+            <div class="${className}">
+                <div>${data.message}</div>
+                <small>${data.created_at}</small>
+            </div>
+            `
+            );
+    };
+
+
+    document.getElementById("send-btn").onclick = function(){
+
+        const input = document.getElementById("message-input");
+
+        socket.send(JSON.stringify({
+            message: input.value
+        }));
+
+        input.value = "";
+    }
+</script>
+</body>
+</html>
+

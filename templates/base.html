@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		{% block title %}
+
+		{% endblock %}
+	</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body>
+	
+		{% if messages %}
+			{% for message in messages %}
+			<div >
+				<b class="messages"><i>{{ message }}</i><b>
+			</div>
+			{% endfor %}
+		{% endif %}
+	
+	<div class="navbar">
+		<ul>
+			{% if 'username' in request.session %}
+				<a href="{% url 'profile' username=request.session.username %}"><li><b><i>^{{ request.session.username }}^</i></b></li></a>
+				<a href="{% url 'logout' %}"><li>Logout</li></a>
+			{% else %}
+				<a href="{% url 'login' %}"><li>Login</li></a>
+				<a href="{% url 'register' %}"><li>Register</li></a>
+			{% endif %}
+		</ul>
+	</div>
+
+	<div class="weather">	
+		<h4>{{ request.session.weather }}</h4>
+	</div>
+
+	{% block content %}
+	{% endblock %}
+	
+</body>
+</html>
