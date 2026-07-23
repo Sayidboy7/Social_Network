@@ -4,7 +4,7 @@ A Django-based social network project.
 
 ## 📦 Installation
 
-Follow these steps to run the project locally.
+--Follow these steps to run the project locally.
 
 ### 1. Clone the repository
 
