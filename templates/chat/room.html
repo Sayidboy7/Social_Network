@@ -56,13 +56,10 @@
     const CURRENT_USER = "{{ request.session.username }}";
     const messages = document.getElementById("messages");
 
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
 
     const socket = new WebSocket(
-        "ws://" +
-        window.location.host +
-        "/ws/chat/" +
-        conversationId +
-        "/"
+        `${protocol}://${window.location.host}/ws/chat/${chatId}/`
     );
 
     socket.onmessage = function(e) {
