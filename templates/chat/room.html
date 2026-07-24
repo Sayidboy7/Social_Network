@@ -2,16 +2,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chatting</title>
+    <title>Chatting</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <h1 align=""><a href="/">Net<i>Work</i></a></h1>
+    <h1 class="mini-logo"><a href="/">Net<i>Work</i></a></h1>
 
-    <h1 align="center">{{ other_user }}</h1>
+    
 
     <div id="messages">
+        <h1 class="username" align="center">{{ other_user }}</h1>
         {% for message in messages %}
         <div class="message">
 
@@ -42,7 +43,7 @@
     </div>
 
 
-		<div class="chat-input"> 
+        <div class="chat-input"> 
             <input type="text" id="message-input"  >
 
             <button id="send-btn">
@@ -51,7 +52,7 @@
         </div>
 
 <script>
-	const conversationId = "{{ conversation.id }}";
+    const conversationId = "{{ conversation.id }}";
     const CURRENT_USER = "{{ request.session.username }}";
     const messages = document.getElementById("messages");
 

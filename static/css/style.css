@@ -27,6 +27,10 @@ ul li {
 	display: none;
 }
 
+.mini-logo {
+	margin-left: 25%;
+}
+
 @media (max-width: 768px) {
     .main-logo {
         margin-left: -150px;
@@ -421,8 +425,18 @@ form input {
     }
 }
 
-.messages {
-	margin-left: 200px;
+#messages {
+	background-color: #c0d1ed;
+	padding: 15px 10px;
+	border-radius: 12px;
+}
+
+.username {
+	background-color: #999;
+	display: inline-block;
+	margin: 0 45%;
+	padding: 5px 10px;
+	border-radius: 6px;
 }
 
 .eye {
