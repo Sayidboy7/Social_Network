@@ -59,7 +59,7 @@
     const protocol = window.location.protocol === "https:" ? "wss" : "ws";
 
     const socket = new WebSocket(
-        `${protocol}://${window.location.host}/ws/chat/${chatId}/`
+        `${protocol}://${window.location.host}/ws/chat/${conversationId}/`
     );
 
     socket.onmessage = function(e) {
