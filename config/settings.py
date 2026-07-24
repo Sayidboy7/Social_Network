@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'taggit',
 
     'chat',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,17 @@ TEMPLATES = [
 ASGI_APPLICATION = 'config.asgi.application'
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+
+import os
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": 'vuhbefvw',
+    "API_KEY": '623825751953999',
+    "API_SECRET": 'u2ooDgBOY6pr-EYGwSfx3X5MFVg',
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 
 # Channel layers for chatting
@@ -143,9 +156,6 @@ STATICFILES_DIRS = [
 
 STATIC_URL = '/static/'
 STATIC_MEDIA = '/media/'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
