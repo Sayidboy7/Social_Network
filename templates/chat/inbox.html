@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inbox</title>
+    <title>Inbox</title>
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"> -->
     <style type="text/css">
         *{
@@ -24,15 +24,17 @@
         /* Sidebar */
     
         .sidebar{
-            width:360px;
+            width: 100%;
+            margin: 10px 10px;
             background:white;
-            border-right:1px solid #ddd;
+            border-right: 1px solid #ddd;
             display:flex;
             flex-direction:column;
         }
     
         .sidebar-header{
-            padding:20px;
+            text-align: center;
+            padding: 20px;
             border-bottom:1px solid #ddd;
         }
     
@@ -197,9 +199,9 @@
         }
 
         .chat-item a {
-			text-decoration: none;
-			color: black;
-		}
+            text-decoration: none;
+            color: black;
+        }
     
         /* Responsive */
     
@@ -217,15 +219,14 @@
     </style>
 </head>
 <body>
-	<h1 align="center">Inbox</h1>
 
 <div class="chat-container">
 
-    <!-- Sidebar -->
+    <!-- Mainbar -->
     <div class="sidebar">
 
         <div class="sidebar-header">
-            <h2>Messages</h2>
+            <h1>Inbox</h1>
         </div>
 
         <div class="search-box">
@@ -233,11 +234,11 @@
         </div>
 
         <div class="chat-list">
-        	{% for con in cons.items %}
+            {% for con in cons.items %}
             <div class="chat-item active">
                 <img src="{{ con.1.image_url }}">
                 <div class="chat-info">
-                	<a href="{% url 'chat_room' conversation_id=con.0 %}" class="link">
+                    <a href="{% url 'chat_room' conversation_id=con.0 %}" class="link">
                     <div class="top">
                         <h4>{{ con.1.other_user }}</h4>
                         <span>{{ con.1.created_at|slice:"10:16" }}</span>
@@ -245,22 +246,12 @@
                     <p>{{ con.1.last_message }}</p>
                     </a>
                 </div>
-            	
+                
             </div>
             {% endfor %}
 
         </div>
 
     </div>
-
-	<!-- {% for con in cons.items %}
-	<div>
-		<a href="{% url 'chat_room' conversation_id=con.0 %}">
-		<h3>{{ con.1.other_user }}</h3>
-		<p>{{ con.1.last_message }}</p>
-		<i>{{ con.1.created_at|slice:"10:16" }}</i>
-		click</a>
-	</div>
-	{% endfor %} -->
 
 </body>
