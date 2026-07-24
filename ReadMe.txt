@@ -79,6 +79,7 @@ python manage.py createsuperuser
 - Python
 - Django
 - Django Channels
+- Redis
 - Uvicorn
 - WebSockets
 - SQLite
