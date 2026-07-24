@@ -90,10 +90,10 @@ python manage.py createsuperuser
 
 ```
 Social_Network/
-│── accounts/
+│── auth_network/
 │── chat/
-│── posts/
 │── config/
+│── Social_Network/
 │── media/
 │── static/
 │── templates/
