@@ -93,7 +93,6 @@ CHANNEL_LAYERS = {
 
 import dj_database_url
 
-DATABASE_URL = 
 
 DATABASES = {
     "default": dj_database_url.config(
