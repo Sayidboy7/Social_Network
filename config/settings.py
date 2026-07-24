@@ -17,7 +17,7 @@ jinja_env = Environment(extensions=['jinja2.ext.loopcontrols'])
 SECRET_KEY = 'django-insecure-(+k5n5gg^6w0)1&(1r(li#7celb4_1#6c#xo)7h+@1-$8pfc-!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
